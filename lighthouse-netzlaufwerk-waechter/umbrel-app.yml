@@ -25,9 +25,9 @@ description: >-
 
   Hinweis: Der Wächter braucht erweiterte Rechte (privileged), weil er Mounts auf
   dem System aushängen muss. Er liest keine Dateien und ändert keine Daten.
-developer: Bitcoin Lighthouse
+developer: Bitcoinlighthouse
 website: https://bitcoinlighthouse.de
-submitter: Bitcoin Lighthouse
+submitter: Bitcoinlighthouse
 submission: https://github.com/cypherpunk21/netzlaufwerk-waechter
 repo: https://github.com/cypherpunk21/netzlaufwerk-waechter
 support: https://github.com/cypherpunk21/netzlaufwerk-waechter/issues
