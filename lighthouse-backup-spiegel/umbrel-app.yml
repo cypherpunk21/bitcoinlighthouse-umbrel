@@ -1,0 +1,41 @@
+manifestVersion: 1
+id: lighthouse-backup-spiegel
+name: Backup-Spiegel
+tagline: Kopiert dein Umbrel-Backup jede Nacht auf eine Hetzner Storage Box
+icon: https://raw.githubusercontent.com/cypherpunk21/netzlaufwerk-waechter/main/lighthouse-backup-spiegel/icon.svg
+category: files
+version: "0.1.0"
+port: 8746
+description: >-
+  umbrelOS sichert sich verschlüsselt auf eine USB-Platte. Der Backup-Spiegel kopiert
+  dieses Backup jede Nacht auf eine Hetzner Storage Box (oder einen anderen SFTP-Server).
+  So hast du eine Kopie zu Hause und eine außer Haus.
+
+
+  Die Übertragung läuft per SFTP über Port 23 und baut bei jedem Abgleich eine frische
+  Verbindung auf. Nichts bleibt dauerhaft eingehängt, und es funktioniert auch hinter
+  VPNs, die Netzlaufwerke (SMB) sperren. Die Storage Box bekommt nur das bereits von
+  umbrelOS verschlüsselte Backup zu sehen.
+
+
+  Einrichten: Unter Einstellungen → Backups ein Backup auf eine USB-Platte anlegen, dann
+  in dieser App Server, Benutzer und Passwort der Storage Box eintragen. Zum
+  Wiederherstellen holt die App ein Backup auf eine USB-Platte zurück, danach geht es in
+  umbrelOS wie gewohnt weiter.
+
+
+  Hinweis: Die App braucht erweiterte Rechte (privileged), damit sie die Backups auf den
+  USB-Platten lesen und beim Zurückholen dorthin schreiben kann.
+developer: Bitcoinlighthouse
+website: https://bitcoinlighthouse.de
+submitter: Bitcoinlighthouse
+submission: https://github.com/cypherpunk21/netzlaufwerk-waechter
+repo: https://github.com/cypherpunk21/netzlaufwerk-waechter
+support: https://github.com/cypherpunk21/netzlaufwerk-waechter/issues
+gallery: []
+releaseNotes: >-
+  Erste Version.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

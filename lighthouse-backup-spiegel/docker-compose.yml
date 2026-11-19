@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      # Format: <app-id>_<service>_1
+      APP_HOST: lighthouse-backup-spiegel_web_1
+      APP_PORT: 8080
+
+  web:
+    image: ghcr.io/cypherpunk21/backup-spiegel:0.1.0
+    restart: unless-stopped
+    stop_grace_period: 30s
+    # Liest die Backups auf den USB-Platten über das Dateisystem des Hosts
+    # (pid: host) und schreibt beim Zurückholen dorthin (privileged).
+    pid: host
+    privileged: true
+    volumes:
+      - ${APP_DATA_DIR}/data:/data
+    environment:
+      TZ: Europe/Berlin   # Zeitzone für die Uhrzeit des nächtlichen Abgleichs

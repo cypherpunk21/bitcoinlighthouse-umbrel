@@ -1,0 +1,77 @@
+name: Backup-Spiegel-Image bauen
+
+# Baut das Image bei jedem Push auf main, der den Backup-Spiegel betrifft.
+# Die Version kommt aus lighthouse-backup-spiegel/umbrel-app.yml.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "image-backup-spiegel/**"
+      - "tests/test_backup_spiegel*.py"
+      - "lighthouse-backup-spiegel/**"
+      - ".github/workflows/backup-spiegel.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Werkzeuge für den Ende-zu-Ende-Test
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq rclone openssh-server
+
+      - name: Tests
+        run: python3 -m unittest tests.test_backup_spiegel -v
+
+      - name: Ende-zu-Ende-Test gegen einen lokalen SFTP-Server
+        run: |
+          sudo useradd -m e2euser
+          echo 'e2euser:E2e Passwort 1!' | sudo chpasswd
+          sudo chmod 755 /home/e2euser
+          ssh-keygen -q -t ed25519 -N '' -f /tmp/hostkey
+          printf 'Port 2223\nListenAddress 127.0.0.1\nHostKey /tmp/hostkey\nPasswordAuthentication yes\nKbdInteractiveAuthentication yes\nUsePAM yes\nSubsystem sftp internal-sftp\nPidFile /tmp/sshd.pid\n' > /tmp/sshd_config
+          sudo mkdir -p /run/sshd && sudo /usr/sbin/sshd -f /tmp/sshd_config
+          sudo BACKUP_SPIEGEL_E2E="127.0.0.1:2223:e2euser:E2e Passwort 1!:/home/e2euser" \
+            python3 -m unittest tests.test_backup_spiegel_e2e -v
+
+      - name: Version prüfen
+        id: version
+        run: |
+          version="$(sed -n 's/^version: *"\{0,1\}\([^"]*\)"\{0,1\} *$/\1/p' lighthouse-backup-spiegel/umbrel-app.yml)"
+          echo "Version laut umbrel-app.yml: ${version}"
+          test -n "${version}"
+          grep -q "backup-spiegel:${version}\$" lighthouse-backup-spiegel/docker-compose.yml \
+            || { echo "docker-compose.yml verweist nicht auf Image-Tag ${version}"; exit 1; }
+          grep -q "^VERSION = \"${version}\"\$" image-backup-spiegel/backup_spiegel.py \
+            || { echo "VERSION in backup_spiegel.py ist nicht ${version}"; exit 1; }
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository_owner }}/backup-spiegel
+          tags: |
+            type=raw,value=${{ steps.version.outputs.version }}
+            type=raw,value=latest
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: image-backup-spiegel
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
