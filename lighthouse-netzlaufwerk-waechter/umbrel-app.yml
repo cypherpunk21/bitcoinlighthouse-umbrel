@@ -2,7 +2,7 @@ manifestVersion: 1
 id: lighthouse-netzlaufwerk-waechter
 name: Netzlaufwerk-Wächter
 tagline: Hängt abgerissene Netzwerkfreigaben automatisch neu ein
-icon: https://raw.githubusercontent.com/cypherpunk21/netzlaufwerk-waechter/main/lighthouse-netzlaufwerk-waechter/icon.svg
+icon: https://raw.githubusercontent.com/cypherpunk21/bitcoinlighthouse-umbrel/main/lighthouse-netzlaufwerk-waechter/icon.svg
 category: files
 version: "0.1.0"
 port: 8743
@@ -28,9 +28,9 @@ description: >-
 developer: Bitcoinlighthouse
 website: https://bitcoinlighthouse.de
 submitter: Bitcoinlighthouse
-submission: https://github.com/cypherpunk21/netzlaufwerk-waechter
-repo: https://github.com/cypherpunk21/netzlaufwerk-waechter
-support: https://github.com/cypherpunk21/netzlaufwerk-waechter/issues
+submission: https://github.com/cypherpunk21/bitcoinlighthouse-umbrel
+repo: https://github.com/cypherpunk21/bitcoinlighthouse-umbrel
+support: https://github.com/cypherpunk21/bitcoinlighthouse-umbrel/issues
 gallery: []
 releaseNotes: >-
   Erste Version.

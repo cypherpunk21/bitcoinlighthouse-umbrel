@@ -1,7 +1,7 @@
 # Bitcoinlighthouse App Store für umbrelOS
 
 Zwei kleine Apps, die Backups von umbrelOS zuverlässiger machen. Installation ohne Terminal:
-**App Store → ⋯ → Community App Stores** und `https://github.com/cypherpunk21/netzlaufwerk-waechter`
+**App Store → ⋯ → Community App Stores** und `https://github.com/cypherpunk21/bitcoinlighthouse-umbrel`
 hinzufügen.
 
 | App | Wofür |
@@ -45,7 +45,7 @@ nicht mehr am toten Mount, sondern am Weg zum Server (z. B. Port 445 gesperrt).
 ## Installation auf dem Umbrel (ohne Terminal)
 
 1. **App Store** öffnen → oben rechts **⋯** → **Community App Stores**.
-2. `https://github.com/cypherpunk21/netzlaufwerk-waechter` einfügen und hinzufügen.
+2. `https://github.com/cypherpunk21/bitcoinlighthouse-umbrel` einfügen und hinzufügen.
 3. Im neuen Store **Netzlaufwerk-Wächter** installieren.
 4. App öffnen: Die Statusseite listet die eingehängten Freigaben.
 
