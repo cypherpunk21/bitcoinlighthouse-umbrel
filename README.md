@@ -73,8 +73,8 @@ Wächter nur, was er tun würde.
 1. Version an drei Stellen anheben: `VERSION` in `image/waechter.py`, `version` in
    `lighthouse-netzlaufwerk-waechter/umbrel-app.yml` und den Image-Tag in
    `lighthouse-netzlaufwerk-waechter/docker-compose.yml`.
-2. Committen und einen passenden Tag pushen, z. B. `git tag v0.1.1 && git push --tags`.
-   Die GitHub-Action testet den Code und baut das Image für amd64 und arm64 nach
+2. Auf `main` pushen. Die GitHub-Action prüft, dass die Version an allen drei Stellen
+   gleich ist, testet den Code und baut das Image für amd64 und arm64 nach
    `ghcr.io/cypherpunk21/netzlaufwerk-waechter`.
 3. Umbrels mit installierter App bieten danach ein Update an.
 
