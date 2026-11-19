@@ -1,0 +1,40 @@
+manifestVersion: 1
+id: lighthouse-netzlaufwerk-waechter
+name: Netzlaufwerk-Wächter
+tagline: Hängt abgerissene Netzwerkfreigaben automatisch neu ein
+icon: https://raw.githubusercontent.com/cypherpunk21/netzlaufwerk-waechter/main/lighthouse-netzlaufwerk-waechter/icon.svg
+category: files
+version: "0.1.0"
+port: 8743
+description: >-
+  Reißt die Verbindung zu einer Netzwerkfreigabe ab, zum Beispiel weil der Router
+  nachts eine neue IP-Adresse bekommt, bleibt in umbrelOS eine tote Verbindung
+  hängen. Die Freigabe steht dann als „nicht verbunden“ in Dateien, Backups melden
+  „host is down“, und bisher half nur ein Neustart.
+
+
+  Der Netzlaufwerk-Wächter prüft jede Minute, ob deine Netzwerkfreigaben antworten.
+  Antwortet eine Freigabe dreimal in Folge nicht, hängt er die tote Verbindung aus.
+  umbrelOS hängt die Freigabe danach von selbst wieder ein, sobald der Server
+  erreichbar ist, und das nächste Backup läuft wieder.
+
+
+  Die App hat keine Einstellungen. Öffne sie, um den Zustand deiner Freigaben und
+  die letzten Ereignisse zu sehen.
+
+
+  Hinweis: Der Wächter braucht erweiterte Rechte (privileged), weil er Mounts auf
+  dem System aushängen muss. Er liest keine Dateien und ändert keine Daten.
+developer: Bitcoin Lighthouse
+website: https://bitcoinlighthouse.de
+submitter: Bitcoin Lighthouse
+submission: https://github.com/cypherpunk21/netzlaufwerk-waechter
+repo: https://github.com/cypherpunk21/netzlaufwerk-waechter
+support: https://github.com/cypherpunk21/netzlaufwerk-waechter/issues
+gallery: []
+releaseNotes: >-
+  Erste Version.
+dependencies: []
+path: ""
+defaultUsername: ""
+defaultPassword: ""

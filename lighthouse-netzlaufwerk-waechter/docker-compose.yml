@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      # Format: <app-id>_<service>_1
+      APP_HOST: lighthouse-netzlaufwerk-waechter_waechter_1
+      APP_PORT: 8080
+
+  waechter:
+    image: ghcr.io/cypherpunk21/netzlaufwerk-waechter:0.1.0
+    restart: unless-stopped
+    stop_grace_period: 10s
+    # Der Wächter muss die Mount-Tabelle des Hosts lesen (pid: host) und tote
+    # SMB-Mounts dort aushängen können (privileged).
+    pid: host
+    privileged: true
+    environment:
+      CHECK_INTERVAL: "60"   # Sekunden zwischen zwei Prüfungen
+      CHECK_TIMEOUT: "20"    # Sekunden, die eine Freigabe zum Antworten hat
+      FAIL_THRESHOLD: "3"    # Fehlschläge in Folge bis zum Aushängen
+      DRY_RUN: "false"       # "true" = nur melden, nichts aushängen
